@@ -20,9 +20,6 @@ from . import forms
 from . import views
 
 urlpatterns = [
-   # path('admin/', admin.site.urls),
-   # path('proapp/',models.data,name='data'),
-    #path('forms/',forms.fdata,name='fdata'),
     path('req/',views.req,name='req'),
     path('result.html',views.ren,name='ren'),
     path('',views.view,name='view'),
