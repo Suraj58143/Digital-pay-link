@@ -1,0 +1,92 @@
+ basically we have implemented or chosen this project in the intension of providing strong security to patient data for hospital management. so ill start explaining why we need security then ill go with the implementation of security standards and functionality of the project. patient data is very sensitive data to an hospital bcoz hackers may steal the data and sell to other hospital for some amount . you can ask me what the hospitals do with that data . yes, they may offer some discount which cost less amount for the same surjery compared to 1st hospital and patients may change their mind and go to less amounted hospital. so basically here stealing the patient data is connected to stlealing the actual patients. so its like a company loosing their customers.
+
+and the other function of our application is providing commution btween doc and patients. patients can share their disease info to doctor and the doc can prescribe the medice related to disease. so patient can share data to any particular doc.
+
+ok lets move forward with abstratc and introduction after that im gonna explain what resources we have implemented for providing security.
+.
+.
+.
+.
+.
+ so basically here we are not getting the data from the wearable device instead we are giving data manually becoz in this lockdown situation we havent got any chance for buying the resources we need for implementing this concept of getting data directly from the device. so if everythig gone well our intension was configuring the device to send patient info to the data base via internet. we may have removed this concept of wearable device but we havent bcoz we have done half of our implementation of front end and data base designing is done. so again changing everyhting from start would be more difficult as we have given seminars including this concept. but  even if we may not implement this concept of wearable device our main functionality of our project doesent change.
+.
+.
+.
+so in the existing system they have failed in proving security for the patient data as their method is not vulnerable to brute force attacks. Here brute force attack consists of an attacker submitting many passwords or passphrases with the hope of eventually guessing correctly. 
+
+ and in the proposed system we have achieved that level of threat by implementing java cryptography entenstion framework which is prone to brute force attacks and eventually provinf a better security. for this firstly we need to import javax.crypto package in our code 
+.
+.
+.
+.
+Create a Cipher object
+The getInstance() method of Cipher class accepts a String variable representing the required transformation and returns a Cipher object that implements the given transformation.
+cipher.getInstance("AES")
+
+Initialize the Cipher object
+The init() method of the Cipher class accepts two parameters an integer parameter representing the operation mode (encrypt/decrypt) and, a Key object representing the public key.
+
+
+Initialize the Cypher object using the init() method as shown below.
+
+//Initializing a Cipher object
+cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+
+ Add data to the Cipher object
+The update() method of the Cipher class accepts a byte array representing the data to be encrypted and updates the current object with the data given.
+
+Update the initialized Cipher object by passing the data to the update() method in the form of byte array as shown below.
+
+//Adding data to the cipher
+byte[] input = "Welcome to Tutorialspoint".getBytes();	  
+cipher.update(input);
+
+so this is how we have achieved the security.
+String keys="q2e34rrfgfgfgg2a";
+ byte[] keyValue = keys.getBytes();
+   Key key = new SecretKeySpec(keyValue, "AES");
+Cipher c =Cipher.getInstance("AES");
+c.init(Cipher.ENCRYPT_MODE, key);
+.
+.
+.
+.
+so the other thing which is sharing the patient data to doc is done by, let whenever the patient submits to doc his data is directly go from the database to doc where the encrypted data is decrypted at the doc side. here we can observe the  decryption is done at only pat and doc side and in db it is stored in encrypted form.
+.
+.
+.
+.
+.
+my contribution to this project is, I have created the database using er diagram which is done by durga and the tables and relations between them using primary and foreign keys.encryption of the data is done by me.
+i have done the connectivity confug using jdbc drivers 
+
+Class.forName("com.mysql.jdbc.Driver");
+	  connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/p22?useSSL=true","root","root");
+      String sql="";
+
+include file="connect.jsp" %>                      
+<%	  
+			  
+	String s1="",s2="",s3="",s4="",s5="",s6="",s7="",s8,s9="",s10,s11,s12,s13;
+	int i=0,j=1,k=0;
+
+ try 
+	{		
+      	                    String query="select * from cloudlet_files "; 
+						   	Statement st=connection.createStatement();
+						   	ResultSet rs=st.executeQuery(query);
+					   		while ( rs.next() ) 
+			                {
+				                 i=rs.getInt(1);
+								s2=rs.getString(2);//name
+								s4=rs.getString(4);//mail
+								s5=rs.getString(5);
+								s6=rs.getString(6);//add
+								s7=rs.getString(7);//dob
+								s8=rs.getString(8);
+								s9=rs.getString(9);
+								s10=rs.getString(10);
+								s11=rs.getString(11);
+								s12=rs.getString(12);//
+
+
